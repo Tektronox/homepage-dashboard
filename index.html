@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Under Construction</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #00ff00;
+            font-family: "Courier New", Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: left;
+            display: inline-block;
+        }
+        .line {
+            display: flex;
+            align-items: center;
+        }
+        .prompt {
+            margin-right: 0.5rem;
+        }
+        .blink {
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="line">
+            <span class="prompt">></span><span>Salü!</span>
+        </div>
+        <div class="line">
+            <span class="prompt">></span><span>welcome to my website</span>
+        </div>
+        <div class="line">
+            <span class="prompt">></span><span>this site is currently under construction.</span>
+        </div>
+        <div class="line">
+            <span class="prompt">></span><span>stay tuned...  </span> <span class="blink"> _</span>
+        </div>
+    </div>
+</body>
+</html>
