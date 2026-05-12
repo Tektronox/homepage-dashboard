@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>schelbert.dev</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-prompt">~/</span><span class="logo-name">schelbert.dev</span>
+      </div>
+      <div class="header-meta">
+        <span class="status-summary" id="status-summary"></span>
+        <span class="last-updated" id="last-updated"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="section-public">
+      <h2 class="section-title"><span class="section-prefix">#</span> Projects &amp; Sites</h2>
+      <div class="card-grid" id="grid-public"></div>
+    </section>
+
+    <section class="section" id="section-links">
+      <h2 class="section-title"><span class="section-prefix">#</span> Resources</h2>
+      <div class="link-list" id="list-links"></div>
+    </section>
+
+    <section class="section" id="section-internal">
+      <h2 class="section-title"><span class="section-prefix">#</span> Internal Services</h2>
+      <div class="service-list" id="list-internal"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span>schelbert.dev &mdash; built with intent</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

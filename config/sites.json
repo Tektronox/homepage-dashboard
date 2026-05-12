@@ -1,0 +1,89 @@
+{
+  "public": [
+    {
+      "name": "Mondsichtung",
+      "url": "https://mondsichtung.com",
+      "description": "Moon observation project",
+      "monitor": true
+    },
+    {
+      "name": "upto",
+      "url": "https://upto.schelbert.dev/",
+      "description": "Uptime monitoring",
+      "monitor": true
+    },
+    {
+      "name": "Virtual Optima",
+      "url": "https://virtualoptima.com/",
+      "description": "Virtual Optima",
+      "monitor": true
+    },
+    {
+      "name": "League Optima",
+      "url": "https://app.leagueoptima.com/",
+      "description": "League optimization app",
+      "monitor": true
+    }
+  ],
+  "links": [
+    {
+      "name": "Schlachter 1951 Hörbuch",
+      "url": "https://1drv.ms/f/c/05d9f7e121583325/IgCtW9gQcEHPQaN2RXTCDASPAVxWMIZ2EBwDN-4pBlAX62Y",
+      "description": "Audio Bibel - Schlachter 1951"
+    },
+    {
+      "name": "N23 Bibel",
+      "url": "https://drive.proton.me/urls/1ZNVX67F0G#at3ZlGvp0ZWo",
+      "description": "Nature23 Bibel"
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.com/Tektronox?tab=repositories",
+      "description": "Public repositories"
+    }
+  ],
+  "internal": [
+    {
+      "name": "Gitea",
+      "url": "https://git.schelbert.dev/",
+      "monitor": true
+    },
+    {
+      "name": "Coder",
+      "url": "https://coder.schelbert.dev/",
+      "monitor": true
+    },
+    {
+      "name": "Jellyfin",
+      "url": "https://media.schelbert.dev",
+      "monitor": true
+    },
+    {
+      "name": "Ollama AI Chat",
+      "url": "https://chat.schelbert.dev/",
+      "monitor": true
+    },
+    {
+      "name": "n8n",
+      "url": "https://n8n.schelbert.dev/",
+      "monitor": true
+    },
+    {
+      "name": "Coolify",
+      "url": "https://coolify.schelbert.dev",
+      "monitor": true
+    },
+    {
+      "name": "n8n Python Services",
+      "url": "http://n8n-python-services:5000/health",
+      "monitor": true,
+      "note": "Docker-internal service"
+    },
+    {
+      "name": "Ollama (local)",
+      "url": "http://REDACTED_IP:11434",
+      "monitor": true,
+      "note": "Local network Ollama instance"
+    }
+  ]
+}
