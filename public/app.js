@@ -11,8 +11,8 @@ function dot(name) {
 
 function faviconUrl(url) {
   try {
-    const { hostname } = new URL(url);
-    return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(hostname)}&sz=16`;
+    new URL(url); // validate
+    return `/api/favicon?url=${encodeURIComponent(url)}`;
   } catch { return ''; }
 }
 
@@ -58,7 +58,6 @@ function renderServices(services) {
   list.innerHTML = services.map(svc => `
     <div class="service-item">
       ${dot(svc.name)}
-      <img class="favicon" src="${faviconUrl(svc.url)}" alt="" width="14" height="14" />
       <span class="service-name">${escHtml(svc.name)}</span>
     </div>
   `).join('');

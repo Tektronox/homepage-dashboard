@@ -7,19 +7,24 @@
       "monitor": true
     },
     {
-      "name": "upto",
-      "url": "https://upto.schelbert.dev/",
-      "description": "new social media thing",
-      "monitor": true
-    },
-    {
       "name": "Virtual Optima",
       "url": "https://virtualoptima.com/",
       "description": "Virtual Optima",
       "monitor": true
+    },
+    {
+      "name": "upto",
+      "url": "https://upto.schelbert.dev/",
+      "description": "new social media thing",
+      "monitor": true
     }
   ],
   "links": [
+{
+      "name": "GitHub",
+      "url": "https://github.com/Tektronox?tab=repositories",
+      "description": "Public repositories"
+    },
     {
       "name": "Schlachter 1951 Hörbuch",
       "url": "https://1drv.ms/f/c/05d9f7e121583325/IgCtW9gQcEHPQaN2RXTCDASPAVxWMIZ2EBwDN-4pBlAX62Y",
@@ -29,14 +34,15 @@
       "name": "N23 Bibel",
       "url": "https://drive.proton.me/urls/1ZNVX67F0G#at3ZlGvp0ZWo",
       "description": "Nature23 Bibel"
-    },
-    {
-      "name": "GitHub",
-      "url": "https://github.com/Tektronox?tab=repositories",
-      "description": "Public repositories"
     }
   ],
   "internal": [
+    {
+      "name": "Coolify",
+      "url": "https://coolify.schelbert.dev",
+      "description": "Self-hosted PaaS",
+      "monitor": true
+    },
     {
       "name": "Forgejo Git",
       "url": "https://git.schelbert.dev/",
@@ -50,6 +56,12 @@
       "monitor": true
     },
     {
+      "name": "n8n",
+      "url": "https://n8n.schelbert.dev/",
+      "description": "Workflow automation",
+      "monitor": true
+    },
+    {
       "name": "Jellyfin",
       "url": "https://media.schelbert.dev",
       "description": "Media server",
@@ -59,18 +71,6 @@
       "name": "Ollama AI Chat",
       "url": "https://chat.schelbert.dev/",
       "description": "Local LLM chat",
-      "monitor": true
-    },
-    {
-      "name": "n8n",
-      "url": "https://n8n.schelbert.dev/",
-      "description": "Workflow automation",
-      "monitor": true
-    },
-    {
-      "name": "Coolify",
-      "url": "https://coolify.schelbert.dev",
-      "description": "Self-hosted PaaS",
       "monitor": true
     },
     {
@@ -94,7 +94,7 @@
       "note": "Docker-internal service"
     },
     {
-      "name": "Ollama (local)",
+      "name": "Ollama Host (local)",
       "url": "http://REDACTED_IP:11434",
       "monitor": true,
       "note": "Local network Ollama instance"
