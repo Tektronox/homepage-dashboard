@@ -85,7 +85,7 @@ function updateSummary() {
 
   const lastEl = document.getElementById('last-updated');
   const now = new Date();
-  lastEl.textContent = `checked ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  lastEl.textContent = `last ping ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
 }
 
 function applyWaveDelays() {

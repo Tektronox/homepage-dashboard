@@ -89,7 +89,7 @@ header {
 
 .last-updated {
   font-size: 0.7rem;
-  color: var(--text-faint);
+  color: var(--text-muted);
 }
 
 /* ── Main ── */
@@ -355,6 +355,6 @@ footer {
   }
 
   .header-meta {
-    display: none;
+    align-items: flex-end;
   }
 }
