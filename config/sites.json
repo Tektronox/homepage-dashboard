@@ -9,7 +9,7 @@
     {
       "name": "upto",
       "url": "https://upto.schelbert.dev/",
-      "description": "Uptime monitoring",
+      "description": "new social media thing",
       "monitor": true
     },
     {
@@ -38,7 +38,7 @@
   ],
   "internal": [
     {
-      "name": "Gitea",
+      "name": "Forgejo Git",
       "url": "https://git.schelbert.dev/",
       "description": "Git forge",
       "monitor": true
@@ -80,9 +80,9 @@
       "monitor": true
     },
     {
-      "name": "Enrol Dashboard",
+      "name": "VO Dashboard",
       "url": "REDACTED_VO_DASHBOARD_URL",
-      "description": "Virtual Optima enrolment",
+      "description": "Virtual Optima Usage Dashboard",
       "monitor": true
     }
   ],
@@ -98,6 +98,11 @@
       "url": "http://REDACTED_IP:11434",
       "monitor": true,
       "note": "Local network Ollama instance"
+    },
+    {
+      "name": "VO Planning API",
+      "url": "REDACTED_VO_PLANNING_API_URL",
+      "monitor": true
     }
   ]
 }

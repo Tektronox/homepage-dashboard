@@ -4,17 +4,16 @@ let statusData = {};
 
 function dot(name) {
   const s = statusData[name];
-  if (!s) return '<span class="dot"></span>';
+  if (!s) return `<span class="dot" data-name="${escHtml(name)}"></span>`;
   const cls = s.online ? 'online' : 'offline';
-  return `<span class="dot ${cls}"></span>`;
+  return `<span class="dot ${cls}" data-name="${escHtml(name)}"></span>`;
 }
 
-function latency(name) {
-  const s = statusData[name];
-  if (!s) return '';
-  if (!s.online) return 'offline';
-  if (s.latencyMs == null) return '';
-  return `${s.latencyMs}ms`;
+function faviconUrl(url) {
+  try {
+    const { hostname } = new URL(url);
+    return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(hostname)}&sz=16`;
+  } catch { return ''; }
 }
 
 function renderPublic(sites) {
@@ -22,12 +21,9 @@ function renderPublic(sites) {
   grid.innerHTML = sites.map(site => `
     <a class="card" href="${escHtml(site.url)}" target="_blank" rel="noopener noreferrer">
       <div class="card-top">
-        <span class="card-name">${escHtml(site.name)}</span>
-      </div>
-      ${site.description ? `<div class="card-desc">${escHtml(site.description)}</div>` : ''}
-      <div class="card-footer">
         ${dot(site.name)}
-        <span class="card-latency" data-name="${escHtml(site.name)}">${latency(site.name)}</span>
+        <img class="favicon" src="${faviconUrl(site.url)}" alt="" width="14" height="14" />
+        <span class="card-name">${escHtml(site.name)}</span>
       </div>
     </a>
   `).join('');
@@ -37,8 +33,8 @@ function renderLinks(links) {
   const list = document.getElementById('list-links');
   list.innerHTML = links.map(link => `
     <a class="link-item" href="${escHtml(link.url)}" target="_blank" rel="noopener noreferrer">
+      <img class="favicon" src="${faviconUrl(link.url)}" alt="" width="14" height="14" />
       <span class="link-name">${escHtml(link.name)}</span>
-      ${link.description ? `<span class="link-desc">${escHtml(link.description)}</span>` : ''}
       <span class="link-arrow">↗</span>
     </a>
   `).join('');
@@ -49,12 +45,9 @@ function renderInternalCards(sites) {
   grid.innerHTML = sites.map(site => `
     <a class="card" href="${escHtml(site.url)}" target="_blank" rel="noopener noreferrer">
       <div class="card-top">
-        <span class="card-name">${escHtml(site.name)}</span>
-      </div>
-      ${site.description ? `<div class="card-desc">${escHtml(site.description)}</div>` : ''}
-      <div class="card-footer">
         ${dot(site.name)}
-        <span class="card-latency" data-name="${escHtml(site.name)}">${latency(site.name)}</span>
+        <img class="favicon" src="${faviconUrl(site.url)}" alt="" width="14" height="14" />
+        <span class="card-name">${escHtml(site.name)}</span>
       </div>
     </a>
   `).join('');
@@ -65,49 +58,21 @@ function renderServices(services) {
   list.innerHTML = services.map(svc => `
     <div class="service-item">
       ${dot(svc.name)}
+      <img class="favicon" src="${faviconUrl(svc.url)}" alt="" width="14" height="14" />
       <span class="service-name">${escHtml(svc.name)}</span>
-      <span class="service-latency" data-name="${escHtml(svc.name)}">${latency(svc.name)}</span>
     </div>
   `).join('');
 }
 
 function updateStatusDots() {
-  // Update dots and latency in public cards
-  document.querySelectorAll('.card-footer').forEach(footer => {
-    const latEl = footer.querySelector('[data-name]');
-    if (!latEl) return;
-    const name = latEl.dataset.name;
-    const dotEl = footer.querySelector('.dot');
+  document.querySelectorAll('.dot[data-name]').forEach(dotEl => {
+    const name = dotEl.dataset.name;
     const s = statusData[name];
     if (!s) return;
+    const delay = dotEl.style.animationDelay;
     dotEl.className = `dot ${s.online ? 'online' : 'offline'}`;
-    latEl.textContent = latency(name);
+    dotEl.style.animationDelay = delay;
   });
-
-  // Update internal cards
-  document.querySelectorAll('#grid-internal .card-footer').forEach(footer => {
-    const latEl = footer.querySelector('[data-name]');
-    if (!latEl) return;
-    const name = latEl.dataset.name;
-    const dotEl = footer.querySelector('.dot');
-    const s = statusData[name];
-    if (!s) return;
-    dotEl.className = `dot ${s.online ? 'online' : 'offline'}`;
-    latEl.textContent = latency(name);
-  });
-
-  // Update service rows
-  document.querySelectorAll('.service-item').forEach(row => {
-    const latEl = row.querySelector('[data-name]');
-    if (!latEl) return;
-    const name = latEl.dataset.name;
-    const dotEl = row.querySelector('.dot');
-    const s = statusData[name];
-    if (!s) return;
-    dotEl.className = `dot ${s.online ? 'online' : 'offline'}`;
-    latEl.textContent = latency(name);
-  });
-
   updateSummary();
 }
 
@@ -122,6 +87,14 @@ function updateSummary() {
   const lastEl = document.getElementById('last-updated');
   const now = new Date();
   lastEl.textContent = `checked ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+}
+
+function applyWaveDelays() {
+  const dots = document.querySelectorAll('.dot');
+  const total = Math.max(dots.length - 1, 1);
+  dots.forEach((dot, i) => {
+    dot.style.animationDelay = `${(i / total) * 2.5}s`;
+  });
 }
 
 function escHtml(str) {
@@ -145,6 +118,7 @@ async function fetchData() {
       renderInternalCards(config.internal);
       renderLinks(config.links);
       renderServices(config.services);
+      applyWaveDelays();
     }
 
     updateStatusDots();
