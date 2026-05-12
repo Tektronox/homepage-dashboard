@@ -81,7 +81,7 @@
     },
     {
       "name": "VO Dashboard",
-      "url": "REDACTED_VO_DASHBOARD_URL",
+      "url": "${VO_DASHBOARD_URL}",
       "description": "Virtual Optima Usage Dashboard",
       "monitor": true
     }
@@ -95,13 +95,13 @@
     },
     {
       "name": "Ollama Host (local)",
-      "url": "http://REDACTED_IP:11434",
+      "url": "${OLLAMA_URL}",
       "monitor": true,
       "note": "Local network Ollama instance"
     },
     {
       "name": "VO Planning API",
-      "url": "REDACTED_VO_PLANNING_API_URL",
+      "url": "${VO_PLANNING_API_URL}",
       "monitor": true
     }
   ]

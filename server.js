@@ -9,8 +9,10 @@ const PORT = process.env.PORT || 3000;
 const CHECK_INTERVAL_MS = 60_000;
 const FETCH_TIMEOUT_MS = 5_000;
 
-// Load config
-const config = JSON.parse(readFileSync(join(__dirname, 'config/sites.json'), 'utf8'));
+// Load config — expand ${VAR} placeholders from environment
+const rawConfig = readFileSync(join(__dirname, 'config/sites.json'), 'utf8')
+  .replace(/\$\{([^}]+)\}/g, (_, name) => process.env[name] ?? '');
+const config = JSON.parse(rawConfig);
 
 // Collect all monitored entries: { name, url, section }
 const monitored = [
