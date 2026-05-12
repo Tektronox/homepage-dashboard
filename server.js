@@ -16,6 +16,7 @@ const config = JSON.parse(readFileSync(join(__dirname, 'config/sites.json'), 'ut
 const monitored = [
   ...config.public.filter(s => s.monitor).map(s => ({ ...s, section: 'public' })),
   ...config.internal.filter(s => s.monitor).map(s => ({ ...s, section: 'internal' })),
+  ...(config.services || []).filter(s => s.monitor).map(s => ({ ...s, section: 'services' })),
 ];
 
 // In-memory cache: name -> { online, latencyMs, lastChecked }

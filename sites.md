@@ -9,7 +9,7 @@
 - upto https://upto.schelbert.dev/
 - Virtual Optima 
  - https://virtualoptima.com/
- - https://app.leagueoptima.com/
+
 
 ## Link only 
 - Schlachter 1951 Hörbuch: https://1drv.ms/f/c/05d9f7e121583325/IgCtW9gQcEHPQaN2RXTCDASPAVxWMIZ2EBwDN-4pBlAX62Y
@@ -24,7 +24,11 @@
 - Ollama AI Chat https://chat.schelbert.dev/
 - n8n https://n8n.schelbert.dev/
 - coolify https://coolify.schelbert.dev
+- League Optima https://app.leagueoptima.com/
+- REDACTED_VO_DASHBOARD_URL
+
 
 ## Services (monitoring only)
 - n8n-python-services (docker network)
 - ollama local http://REDACTED_IP:11434
+- planning api TODO

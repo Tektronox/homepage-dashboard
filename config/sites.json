@@ -17,12 +17,6 @@
       "url": "https://virtualoptima.com/",
       "description": "Virtual Optima",
       "monitor": true
-    },
-    {
-      "name": "League Optima",
-      "url": "https://app.leagueoptima.com/",
-      "description": "League optimization app",
-      "monitor": true
     }
   ],
   "links": [
@@ -46,33 +40,53 @@
     {
       "name": "Gitea",
       "url": "https://git.schelbert.dev/",
+      "description": "Git forge",
       "monitor": true
     },
     {
       "name": "Coder",
       "url": "https://coder.schelbert.dev/",
+      "description": "Cloud dev environments",
       "monitor": true
     },
     {
       "name": "Jellyfin",
       "url": "https://media.schelbert.dev",
+      "description": "Media server",
       "monitor": true
     },
     {
       "name": "Ollama AI Chat",
       "url": "https://chat.schelbert.dev/",
+      "description": "Local LLM chat",
       "monitor": true
     },
     {
       "name": "n8n",
       "url": "https://n8n.schelbert.dev/",
+      "description": "Workflow automation",
       "monitor": true
     },
     {
       "name": "Coolify",
       "url": "https://coolify.schelbert.dev",
+      "description": "Self-hosted PaaS",
       "monitor": true
     },
+    {
+      "name": "League Optima",
+      "url": "https://app.leagueoptima.com/",
+      "description": "League optimization app",
+      "monitor": true
+    },
+    {
+      "name": "Enrol Dashboard",
+      "url": "REDACTED_VO_DASHBOARD_URL",
+      "description": "Virtual Optima enrolment",
+      "monitor": true
+    }
+  ],
+  "services": [
     {
       "name": "n8n Python Services",
       "url": "http://n8n-python-services:5000/health",

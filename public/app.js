@@ -44,8 +44,24 @@ function renderLinks(links) {
   `).join('');
 }
 
-function renderInternal(services) {
-  const list = document.getElementById('list-internal');
+function renderInternalCards(sites) {
+  const grid = document.getElementById('grid-internal');
+  grid.innerHTML = sites.map(site => `
+    <a class="card" href="${escHtml(site.url)}" target="_blank" rel="noopener noreferrer">
+      <div class="card-top">
+        <span class="card-name">${escHtml(site.name)}</span>
+      </div>
+      ${site.description ? `<div class="card-desc">${escHtml(site.description)}</div>` : ''}
+      <div class="card-footer">
+        ${dot(site.name)}
+        <span class="card-latency" data-name="${escHtml(site.name)}">${latency(site.name)}</span>
+      </div>
+    </a>
+  `).join('');
+}
+
+function renderServices(services) {
+  const list = document.getElementById('list-services');
   list.innerHTML = services.map(svc => `
     <div class="service-item">
       ${dot(svc.name)}
@@ -68,7 +84,19 @@ function updateStatusDots() {
     latEl.textContent = latency(name);
   });
 
-  // Update internal service rows
+  // Update internal cards
+  document.querySelectorAll('#grid-internal .card-footer').forEach(footer => {
+    const latEl = footer.querySelector('[data-name]');
+    if (!latEl) return;
+    const name = latEl.dataset.name;
+    const dotEl = footer.querySelector('.dot');
+    const s = statusData[name];
+    if (!s) return;
+    dotEl.className = `dot ${s.online ? 'online' : 'offline'}`;
+    latEl.textContent = latency(name);
+  });
+
+  // Update service rows
   document.querySelectorAll('.service-item').forEach(row => {
     const latEl = row.querySelector('[data-name]');
     if (!latEl) return;
@@ -114,8 +142,9 @@ async function fetchData() {
     // Only render structure on first load
     if (!document.getElementById('grid-public').hasChildNodes()) {
       renderPublic(config.public);
+      renderInternalCards(config.internal);
       renderLinks(config.links);
-      renderInternal(config.internal);
+      renderServices(config.services);
     }
 
     updateStatusDots();
