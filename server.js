@@ -97,13 +97,16 @@ async function resolveFavicon(siteUrl) {
     const match = html.match(/<link[^>]+rel=["'][^"']*icon[^"']*["'][^>]+href=["']([^"']+)["']/i)
                || html.match(/<link[^>]+href=["']([^"']+)["'][^>]+rel=["'][^"']*icon[^"']*["']/i);
     const iconPath = match ? match[1] : '/favicon.ico';
-    const iconUrl = iconPath.startsWith('http') ? iconPath : new URL(iconPath, origin).href;
+    const iconUrl = iconPath.startsWith('http') ? iconPath : new URL(iconPath, htmlRes.url).href;
 
     // 2. Fetch the icon itself
+    const iconController = new AbortController();
+    const iconTimer = setTimeout(() => iconController.abort(), 5_000);
     const iconRes = await fetch(iconUrl, {
-      signal: new AbortController().signal,
+      signal: iconController.signal,
       headers: { 'User-Agent': 'schelbert-favicon/1.0' },
     });
+    clearTimeout(iconTimer);
     if (!iconRes.ok) { faviconCache.set(origin, null); return null; }
     const buffer = Buffer.from(await iconRes.arrayBuffer());
     const contentType = iconRes.headers.get('content-type') || 'image/x-icon';

@@ -29,7 +29,7 @@ html {
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font);
-  font-size: 14px;
+  font-size: 17.5px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
