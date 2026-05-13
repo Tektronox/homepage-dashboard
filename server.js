@@ -1,4 +1,5 @@
 import express from 'express';
+import rateLimit from 'express-rate-limit';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -13,6 +14,16 @@ const FETCH_TIMEOUT_MS = 5_000;
 const rawConfig = readFileSync(join(__dirname, 'config/sites.json'), 'utf8')
   .replace(/\$\{([^}]+)\}/g, (_, name) => process.env[name] ?? '');
 const config = JSON.parse(rawConfig);
+
+// Build allowlist of permitted origins for favicon fetches (all sections of config)
+const allowedFaviconOrigins = new Set();
+for (const section of ['public', 'links', 'internal', 'services']) {
+  for (const site of config[section] || []) {
+    if (site.url) {
+      try { allowedFaviconOrigins.add(new URL(site.url).origin); } catch {}
+    }
+  }
+}
 
 // Collect all monitored entries: { name, url, section }
 const monitored = [
@@ -106,13 +117,28 @@ async function resolveFavicon(siteUrl) {
   }
 }
 
+// Security headers
+app.use((req, res, next) => {
+  res.set('X-Frame-Options', 'DENY');
+  res.set('X-Content-Type-Options', 'nosniff');
+  res.set('Referrer-Policy', 'no-referrer');
+  res.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  res.set('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self'");
+  res.removeHeader('X-Powered-By');
+  next();
+});
+
 // Static frontend
 app.use(express.static(join(__dirname, 'public')));
 
 // Favicon proxy
-app.get('/api/favicon', async (req, res) => {
+const faviconRateLimit = rateLimit({ windowMs: 60_000, max: 30 });
+app.get('/api/favicon', faviconRateLimit, async (req, res) => {
   const { url } = req.query;
   if (!url || !/^https?:\/\//i.test(url)) return res.status(400).end();
+  let reqOrigin;
+  try { reqOrigin = new URL(url).origin; } catch { return res.status(400).end(); }
+  if (!allowedFaviconOrigins.has(reqOrigin)) return res.status(400).end();
   const entry = await resolveFavicon(url);
   if (!entry) return res.status(404).end();
   res.set('Content-Type', entry.contentType);
@@ -120,10 +146,14 @@ app.get('/api/favicon', async (req, res) => {
   res.send(entry.buffer);
 });
 
-// API: return full config + status
+// API: return config + status, stripping URLs from services to avoid internal topology leak
 app.get('/api/data', (_req, res) => {
   const status = Object.fromEntries(statusCache);
-  res.json({ config, status });
+  const safeConfig = {
+    ...config,
+    services: (config.services || []).map(({ url: _url, ...rest }) => rest),
+  };
+  res.json({ config: safeConfig, status });
 });
 
 app.listen(PORT, () => {
