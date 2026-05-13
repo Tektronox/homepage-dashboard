@@ -88,12 +88,6 @@
   ],
   "services": [
     {
-      "name": "n8n Python Services",
-      "url": "http://n8n-python-services:5000/health",
-      "monitor": true,
-      "note": "Docker-internal service"
-    },
-    {
       "name": "Ollama Host (local)",
       "url": "${OLLAMA_URL}",
       "monitor": true,
