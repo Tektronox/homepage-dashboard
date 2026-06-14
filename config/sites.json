@@ -11,13 +11,14 @@
       "url": "https://virtualoptima.com/",
       "description": "Virtual Optima",
       "monitor": true
-    },
-    {
-      "name": "upto",
-      "url": "https://upto.schelbert.dev/",
-      "description": "new social media thing",
+    }, 
+        {
+      "name": "League Optima",
+      "url": "https://leagueoptima.com/",
+      "description": "League optimization app",
       "monitor": true
     }
+
   ],
   "links": [
 {
@@ -71,12 +72,6 @@
       "name": "Ollama AI Chat",
       "url": "https://chat.schelbert.dev/",
       "description": "Local LLM chat",
-      "monitor": true
-    },
-    {
-      "name": "League Optima",
-      "url": "https://app.leagueoptima.com/",
-      "description": "League optimization app",
       "monitor": true
     },
     {
